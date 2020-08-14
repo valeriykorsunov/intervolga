@@ -1,3 +1,11 @@
+footer{
+	color: rgba(255, 255, 255, 0.5);
+}
+
 .navbar-collapse{
 justify-content: flex-end;
+}
+
+.footer-text{
+	padding: 10px 20px 10px 10px;
 }
