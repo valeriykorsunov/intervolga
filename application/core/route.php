@@ -36,6 +36,7 @@ class Route
 		}
 
 		// подцепляем файл с классом контроллера
+		
 		$controller_file = strtolower($controller_name).'.php';
 		$controller_path = "application/controllers/".$controller_file;
 		
@@ -43,20 +44,11 @@ class Route
 		{
 			include "application/controllers/".$controller_file;
 		}
-		else
+		else // 404
 		{
-			/*
-			правильно было бы кинуть здесь исключение,
-			но для упрощения сразу сделаем редирект на страницу 404
-			*/
 			$controller_name = 'controller_404';
-			
-			// подцепляем файл с классом контроллера
-			$controller_file = strtolower($controller_name).'.php';
-			$controller_path = "application/controllers/".$controller_file;
-			include "application/controllers/".$controller_file;
-			
-			(new Route())->ErrorPage404();
+			Route::ErrorPage404();
+			return;
 		}
 		
 		// создаем контроллер
@@ -70,17 +62,20 @@ class Route
 		}
 		else
 		{
-			// здесь также разумнее было бы кинуть исключение
-			(new Route())->ErrorPage404();
+			Route::ErrorPage404();
 		}
 	
 	}
 	
-	function ErrorPage404()
+	static function ErrorPage404()
 	{
-        $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
-        header('HTTP/1.1 404 Not Found');
+		// подцепляем файл с классом контроллера
+		include 'application/controllers/controller_404.php';
+		$controller = new Controller_404;
+
+		header('HTTP/1.1 404 Not Found');
 		header("Status: 404 Not Found");
-		//header('Location:'.$host.'404');
+
+		$controller->action_index();
     }
 }
