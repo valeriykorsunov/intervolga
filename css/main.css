@@ -9,3 +9,7 @@ justify-content: flex-end;
 .footer-text{
 	padding: 10px 20px 10px 10px;
 }
+
+.snake td{
+	padding: 5px;
+}
