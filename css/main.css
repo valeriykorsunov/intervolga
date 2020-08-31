@@ -13,3 +13,13 @@ justify-content: flex-end;
 .snake td{
 	padding: 5px;
 }
+
+div.scroll-table {
+	width: 90%;
+	overflow: auto;
+	max-height: 650px;
+  }
+
+.container{
+	padding: 10px 0;
+}

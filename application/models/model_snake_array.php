@@ -6,11 +6,13 @@ class Model_Snake_array extends Model
 	{
 		$arData = array();
 		$n = 10; // строка
-		$m = 15; // столбец
+		$m = 20; // столбец
 		// просто наполнить массив числами
 		$num = 1;
-		for ($i = 1; $i <= $n; $i++) {
-			for ($j = 1; $j <= $m; $j++) {
+		for ($i = 1; $i <= $n; $i++)
+		{
+			for ($j = 1; $j <= $m; $j++)
+			{
 				$arData[$i][$j] = $num++;
 			}
 		}
@@ -21,19 +23,22 @@ class Model_Snake_array extends Model
 		$arrN = range(1, $n);
 		$arrM = range(1, $m);
 
-		while (count($lineArray) > 0) {
-			$randomcolor = '#' . dechex(rand(256,16777215)); // украсить сассив 
+		while (count($lineArray) > 0)
+		{
+			$randomcolor = '#' . dechex(rand(256, 16777215)); // украсить сассив 
 
 			/** Наполнение массива по кругу */
 			// 1-я строка
 			$str = array_shift($arrN);
-			foreach ($arrM as $val) {
+			foreach ($arrM as $val)
+			{
 				$resultArr[$str][$val][0] = array_shift($lineArray);
 				$resultArr[$str][$val]["color"] = $randomcolor;
 			}
 			// последний столбец
 			$col = array_pop($arrM);
-			foreach ($arrN as $val) {
+			foreach ($arrN as $val)
+			{
 				$resultArr[$val][$col][0] = array_shift($lineArray);
 				$resultArr[$val][$col]["color"] = $randomcolor;
 			}
@@ -41,7 +46,8 @@ class Model_Snake_array extends Model
 			$str = array_pop($arrN);
 			$rsortArrM = $arrM;
 			krsort($rsortArrM);
-			foreach ($rsortArrM as $val) {
+			foreach ($rsortArrM as $val)
+			{
 				$resultArr[$str][$val][0] = array_shift($lineArray);
 				$resultArr[$str][$val]["color"] = $randomcolor;
 			}
@@ -49,7 +55,8 @@ class Model_Snake_array extends Model
 			$col = array_shift($arrM);
 			$rsortArrN = $arrN;
 			krsort($rsortArrN);
-			foreach ($rsortArrN as $val) {
+			foreach ($rsortArrN as $val)
+			{
 				$resultArr[$val][$col][0] = array_shift($lineArray);
 				$resultArr[$val][$col]["color"] = $randomcolor;
 			}
@@ -58,7 +65,7 @@ class Model_Snake_array extends Model
 
 		// Так как массив отсортирован сечас в порядке наполнения
 		// делаю правильную сортировка
-		foreach($resultArr as $key=>$str)
+		foreach ($resultArr as $key => $str)
 		{
 			ksort($resultArr[$key]);
 		}
@@ -68,8 +75,10 @@ class Model_Snake_array extends Model
 	function lineArray($array)
 	{
 		$lineArray = array();
-		foreach ($array as $arTwo) {
-			foreach ($arTwo as $value) {
+		foreach ($array as $arTwo)
+		{
+			foreach ($arTwo as $value)
+			{
 				$lineArray[] = $value;
 			}
 		}

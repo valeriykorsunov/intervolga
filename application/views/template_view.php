@@ -12,6 +12,7 @@
 <body class="d-flex flex-column min-vh-100">
 	<header class="header">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<div class="container">
 			<a class="navbar-brand" href="/">Главная</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
@@ -22,6 +23,7 @@
 						<a class="nav-link <?=$arResult["snake_array"]?>" href="/snake_array/">Массив змейкой</a>
 					</li>
 				</ul>
+			</div>
 			</div>
 		</nav>
 	</header>
