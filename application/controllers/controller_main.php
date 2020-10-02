@@ -9,4 +9,11 @@ class Controller_Main extends Controller
 		);
 		$this->view->generate('main_view.php', 'template_view.php', $arResult);
 	}
+
+	function action_logout()
+	{
+		session_start();
+		session_destroy();
+		header('Location:/');
+	}
 }

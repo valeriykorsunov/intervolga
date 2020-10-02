@@ -23,3 +23,39 @@ div.scroll-table {
 .container{
 	padding: 10px 0;
 }
+
+body, textarea {
+    font-family: "Open Sans", Verdana, Helvetica, sans-serif;
+}
+
+.error_desc404 {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 0 auto 45px;
+    letter-spacing: 1px;
+}
+
+.page404 {
+    color: #dfdfdf;
+    font-size: 250px;
+    line-height: 250px;
+    margin: 0;
+    position: relative;
+    text-align: center;
+}
+
+.page404 > span {
+    font-weight: 600;
+}
+
+.hm_columns {
+    position: relative;
+    min-height: 1px;
+    height: 100%;
+    float: left;
+}
+
+b, strong {
+    font-weight: bold;
+}

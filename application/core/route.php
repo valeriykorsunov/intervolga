@@ -1,6 +1,8 @@
 <?
 class Route
 {
+	static $auth;
+
 	static function start()
 	{
 		// контроллер и действие по умолчанию
@@ -8,18 +10,23 @@ class Route
 		$action_name = 'index';
 		
 		$routes = explode('/', $_SERVER['REQUEST_URI']);
-
 		// получаем имя контроллера
 		if ( !empty($routes[1]) )
 		{	
 			$controller_name = $routes[1];
 		}
-		
 		// получаем имя экшена
 		if ( !empty($routes[2]) )
 		{
 			$action_name = $routes[2];
 		}
+
+		if(Route::auth()==false)
+		{
+			$controller_name = 'login';
+			$action_name = 'index';
+		}
+
 
 		// добавляем префиксы
 		$model_name = 'Model_'.$controller_name;
@@ -74,5 +81,26 @@ class Route
 		header("Status: 404 Not Found");
 
 		$controller->action_index();
-    }
+	}
+	
+	static function auth()
+	{
+		session_start();
+		
+		/*
+		Для простоты, в нашем случае, проверяется равенство сессионной переменной admin прописанному
+		в коде значению — паролю. Такое решение не правильно с точки зрения безопасности.
+		Пароль должен храниться в базе данных в захешированном виде, но пока оставим как есть.
+		*/
+		if ( $_SESSION['admin'] == "12345" )
+		{
+			Route::$auth = true;
+		}
+		else
+		{
+			Route::$auth = false;
+		}
+		return Route::$auth;
+	}
+	
 }

@@ -10,6 +10,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+	<?if(Route::$auth):?>
 	<header class="header">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<div class="container">
@@ -22,11 +23,17 @@
 					<li class="nav-item">
 						<a class="nav-link <?=$arResult["snake_array"]?>" href="/snake_array/">Массив змейкой</a>
 					</li>
+					<?if(Route::$auth):?>
+					<li class="nav-item">
+						<a class="nav-link" href="/main/logout">Выход</a>
+					</li>
+					<?endif?>
 				</ul>
 			</div>
 			</div>
 		</nav>
 	</header>
+	<?endif?>
 
 	<main class="content">
 		<?php include 'application/views/' . $content_view; ?>
