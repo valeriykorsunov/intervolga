@@ -14,13 +14,13 @@ class View
 	 * @param array $data
 	 * @throws \ErrorException
 	 */
-	public static function render(string $path, array $data = [])
+	public static function render(string $template, string $path, array $data = [])
 	{
 		// Получаем путь, где лежат все представления
-		$fullPath = __DIR__ . '/../Views/' . $path . '.php';
+		$fullPathView = __DIR__ . '/../Views/' . $path . '.php';
 		
 		// Если представление не было найдено, выбрасываем исключение
-		if (!file_exists($fullPath))
+		if (!file_exists($fullPathView))
 		{
 			throw new \ErrorException('view cannot be found');
 		}
@@ -35,7 +35,11 @@ class View
 			}
 		}
 
+		$fullTemplatePath = __DIR__ . '/../Views/templates/' . $template . '.php';
+		// Отображаем шаблон
+		include($fullTemplatePath);
+
 		// Отображаем представление
-		include($fullPath);
+		// include($fullPath);
 	}
 }

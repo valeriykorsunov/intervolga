@@ -3,14 +3,14 @@
 
 <head>
 	<meta charset="utf-8">
-	<title><?=$arResult["title"]?></title>
+	<title><?//=$arResult["title"]?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="/css/main.css" />
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-	<?if(Route::$auth):?>
+	<?//if(Route::$auth):?>
 	<header class="header">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<div class="container">
@@ -23,20 +23,20 @@
 					<li class="nav-item">
 						<a class="nav-link <?=$arResult["snake_array"]?>" href="/snake_array/">Массив змейкой</a>
 					</li>
-					<?if(Route::$auth):?>
+					<?//if(Route::$auth):?>
 					<li class="nav-item">
 						<a class="nav-link" href="/main/logout">Выход</a>
 					</li>
-					<?endif?>
+					<?//endif?>
 				</ul>
 			</div>
 			</div>
 		</nav>
 	</header>
-	<?endif?>
+	<?//	endif?>
 
 	<main class="content">
-		<?php include 'application/views/' . $content_view; ?>
+		<?php include $fullPathView; ?>
 	</main>
 
 	<div class="wrapper flex-grow-1"></div>

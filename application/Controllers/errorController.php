@@ -8,7 +8,7 @@ use System\View;
  * Главный контроллер приложения
  *
  */
-class errorController
+class errorController extends Controller
 {
 	/**
 	 * Действие отвечающее за отображение главной
@@ -18,6 +18,6 @@ class errorController
 	public function action404()
 	{
 		// Рендер главной страницы портала
-		View::render('404');
+		View::render($this->templateViwe, $this->dirViwe.'404');
 	}
 }

@@ -44,7 +44,7 @@ class App
 		// Если класса не существует, выбрасывем исключение
 		if (!class_exists($controller))
 		{
-			throw new \ErrorException('Controller не существует', 404);
+			throw new \ErrorException('Controller "'.$controller.'" не существует', 404);
 		}
 
 		// Создаем экземпляр класса контроллера

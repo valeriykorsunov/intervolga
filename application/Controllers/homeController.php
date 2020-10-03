@@ -3,7 +3,6 @@
 namespace Controllers;
 
 use System\View;
-use Models\News;
 
 /**
  * Главный контроллер приложения
@@ -11,9 +10,5 @@ use Models\News;
  */
 class homeController extends Controller
 {
-	public function actionIndex()
-	{
-		// Рендер главной страницы портала
-		View::render('index');
-	}
+
 }

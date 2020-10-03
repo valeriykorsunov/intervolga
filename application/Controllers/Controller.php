@@ -9,20 +9,22 @@ use System\View;
  */
 class Controller
 {
-	public $nameController;
+	public $dirViwe="";
+	public $templateViwe = "main";
 
 	function __construct($nameController)
 	{
-		$this->nameController = $nameController;
+		$this->dirViwe = $nameController."/";
 	}
+
 	/**
 	 * Действие отвечающее за отображение главной
-	 * страницы портала
+	 * страницы 
 	 *
 	 */
 	public function actionIndex()
 	{
-		// Рендер главной страницы портала
-		View::render('Index');
+		// Рендер главной страницы 
+		View::render($this->templateViwe, $this->dirViwe.'index');
 	}
 }
