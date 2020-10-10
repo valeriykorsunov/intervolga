@@ -1,9 +1,12 @@
 <?php
+namespace Controllers;
 
-class Controller_Login extends Controller
+use System\View;
+
+class loginController extends Controller
 {
 	
-	function action_index()
+	function actionIndex()
 	{
 		//$data["login_status"] = "";
 
@@ -35,7 +38,7 @@ class Controller_Login extends Controller
 			$data["login_status"] = "";
 		}
 		
-		$this->view->generate('login_view.php', 'template_view.php', $data);
+		View::render($this->templateViwe, $this->dirViwe.'index',$data);
 	}
 	
 }

@@ -15,12 +15,12 @@
 </div>
 
 
-<?php extract($data); ?>
-<?php if ($login_status == "access_granted")
+<? extract($data); ?>
+<? if ($login_status == "access_granted")
 { ?>
 	<p style="color:green">Авторизация прошла успешно.</p>
-<?php }
+<? }
 elseif ($login_status == "access_denied")
 { ?>
 	<p style="color:red">Логин и/или пароль введены неверно.</p>
-<?php } ?>
+<?} ?>

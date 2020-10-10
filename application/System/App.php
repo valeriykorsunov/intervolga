@@ -2,6 +2,8 @@
 
 namespace System;
 
+use Models\User;
+
 /**
  * Главный класс приложения
  *
@@ -14,8 +16,9 @@ class App
 	 * 
 	 * @throws \ErrorException если Controller или action не существует
 	 */
-	public static function run($controller = "home", $action = "index", $path = true)
+	public static function run($controller = "main", $action = "index", $path = true)
 	{
+		new User;
 		$nameController = $controller;
 		if ($path)
 		{
@@ -36,6 +39,12 @@ class App
 		if ($pathParts[2])
 		{
 			$action = $pathParts[2];
+		}
+
+		if(User::$auth == false)
+		{
+			$controller = 'main';
+			$action = 'login';
 		}
 
 		// Формируем пространство имен для контроллера
