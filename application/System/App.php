@@ -19,7 +19,6 @@ class App
 	public static function run($controller = "main", $action = "index", $path = true)
 	{
 		new User;
-		$nameController = $controller;
 		if ($path)
 		{
 			// Получаем URL запроса
@@ -47,13 +46,15 @@ class App
 			$action = 'login';
 		}
 
+		$nameController = $controller;
 		// Формируем пространство имен для контроллера
 		$controller = 'Controllers\\' . $controller . 'Controller';
 
 		// Если класса не существует, выбрасывем исключение
 		if (!class_exists($controller))
 		{
-			throw new \ErrorException('Controller "'.$controller.'" не существует', 404);
+			App::run("error","404", false);
+			//throw new \ErrorException('Controller "'.$controller.'" не существует', 404);
 		}
 
 		// Создаем экземпляр класса контроллера
@@ -64,7 +65,8 @@ class App
 		// Если действия у контроллера не существует, выбрасываем исключение
 		if (!method_exists($objController, $action))
 		{
-			throw new \ErrorException('action "' . $action . '" не существует', 404);
+			App::run("error","404", false);
+			//throw new \ErrorException('action "' . $action . '" не существует', 404);
 		}
 
 		// Вызываем действие контроллера

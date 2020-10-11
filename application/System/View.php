@@ -14,7 +14,7 @@ class View
 	 * @param array $data
 	 * @throws \ErrorException
 	 */
-	public static function render(string $template, string $path, array $data = [])
+	public static function render(string $template, string $path, array $arResult = [])
 	{
 		/**
 		 * Получаем путь, где лежат все представления
@@ -33,9 +33,9 @@ class View
 		 * Если данные были переданы, то из элементов массива
 		 * создаются переменные, которые будут доступны в представлении
 		 */
-		if (!empty($data))
+		if (!empty($arResult))
 		{
-			foreach ($data as $key => $value)
+			foreach ($arResult as $key => $value)
 			{
 				$$key = $value;
 			}

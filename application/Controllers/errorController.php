@@ -13,7 +13,6 @@ class errorController extends Controller
 	/**
 	 * Действие отвечающее за отображение главной
 	 * страницы портала
-	 *
 	 */
 	public function action404()
 	{

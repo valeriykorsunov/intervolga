@@ -13,6 +13,7 @@ class ErrorHandler
 
 	public function exceptionErrorHandler(Exception $e)
 	{
+		\var_dump($e);
 		if($e->getCode() == 404){
 			//(new ..\Controllers\errorController("error"))->action404();
 			App::run("error","404", false);

@@ -30,6 +30,9 @@ use Models\User;
 						<a class="nav-link <?=$arResult["snake_array"]?>" href="/snake_array/">Массив змейкой</a>
 					</li>
 					<?if(User::$auth):?>
+						<li class="nav-item">
+						<a class="nav-link" href="/dbedit/">Работа с БД</a>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/main/logout">Выход</a>
 					</li>
