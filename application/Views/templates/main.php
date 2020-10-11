@@ -1,4 +1,5 @@
 <?
+
 use Models\User;
 ?>
 <!DOCTYPE html>
@@ -6,11 +7,7 @@ use Models\User;
 
 <head>
 	<meta charset="utf-8">
-	<title><?//=$arResult["title"]
-
-
-
-?></title>
+	<title><?= $arResult["title"] ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="/css/main.css" />
@@ -20,31 +17,40 @@ use Models\User;
 	<header class="header">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<div class="container">
-			<a class="navbar-brand" href="/">Главная</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse " id="collapsibleNavbar">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link <?=$arResult["snake_array"]?>" href="/snake_array/">Массив змейкой</a>
-					</li>
-					<?if(User::$auth):?>
+				<a class="navbar-brand" href="/">Главная</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse " id="collapsibleNavbar">
+					<ul class="navbar-nav">
 						<li class="nav-item">
-						<a class="nav-link" href="/dbedit/">Работа с БД</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/main/logout">Выход</a>
-					</li>
-					<?endif?>
-				</ul>
-			</div>
+							<a class="nav-link <?= $arResult["snake_array"] ?>" href="/snake_array/">Массив змейкой</a>
+						</li>
+						<? if (User::$auth) : ?>
+							<li class="nav-item">
+								<a class="nav-link" href="/dbedit/">Работа с БД</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/main/logout">Выход</a>
+							</li>
+						<? endif ?>
+					</ul>
+				</div>
 			</div>
 		</nav>
 	</header>
 
 
 	<main class="content">
+		<? if ($arResult["menuSection"]) : ?>
+			<div class="container">
+				<div class="row">
+					<? foreach ($arResult["menuSection"] as $menuSection) : ?>
+						<div class="col-2"><a href="<?= $menuSection["URL"] ?>" class="btn btn-light"><?= $menuSection["NAME"] ?></a></div>
+					<? endforeach ?>
+				</div>
+			</div>
+		<? endif ?>
 		<?php include $fullPathView; ?>
 	</main>
 
@@ -54,7 +60,7 @@ use Models\User;
 		<div class="footer-text float-sm-right">
 			Решение подготовил: Корсунов Валеирий
 			<br>
-			e-mail: <a href="mail-to:kors.vv@ya.ru">kors.vv@ya.ru</a> 	
+			e-mail: <a href="mail-to:kors.vv@ya.ru">kors.vv@ya.ru</a>
 			<br>
 			telegram: <a href="https://t.me/valeriykorsunov">https://t.me/valeriykorsunov</a>
 		</div>

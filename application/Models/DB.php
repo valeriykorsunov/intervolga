@@ -38,36 +38,47 @@ class DB
 		mysqli_close($this->link);
 	}
 
-	function getSqlText(string $text)
+	function textSqlQuery(string $text)
 	{
 		if ($result = $this->link->query($text))
 		{
-			$result = $result->fetch_all();
+			if(gettype($result) == "object")
+			{
+				$result = $result->fetch_all();
+				mysqli_free_result($result);
+			}
+			
+			if(gettype($result) != "array")
+			{
+				$result = array($result);
+			}
 			return $result;
-			/* Освобождаем используемую память */
-			mysqli_free_result($result);
 		}
-		return false;
+
+		return array();
 	}
 
 	function getAllTable()
 	{
+		$arows = array();
 		if ($result = $this->link->query('SHOW TABLES FROM 7v2m4jsdb;'))
 		{
-			$rows = mysqli_num_rows($result);
-			\var_dump($result->fetch_all());
-			if($rows == 0)
-			{
-				mysqli_free_result($result);
-				$this->link->query(
-					'CREATE TABLE cities (
-						id INT AUTO_INCREMENT PRIMARY KEY,
-						name CHAR(128)
-					)'
-				);
-			}
+			$arows = $result->fetch_all();
+
+
 			/* Освобождаем используемую память */
 			mysqli_free_result($result);
 		}
+		return $arows;
+	}
+
+	function createTable()
+	{
+		$this->link->query(
+			'CREATE TABLE cities (
+				id INT AUTO_INCREMENT PRIMARY KEY,
+				name CHAR(128)
+			)'
+		);
 	}
 }

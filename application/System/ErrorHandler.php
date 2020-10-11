@@ -11,7 +11,7 @@ class ErrorHandler
 		set_exception_handler([$this, 'exceptionErrorHandler']);
 	}
 
-	public function exceptionErrorHandler(Exception $e)
+	public function exceptionErrorHandler( $e) //Exception
 	{
 		\var_dump($e);
 		if($e->getCode() == 404){
@@ -20,7 +20,7 @@ class ErrorHandler
 			echo $e->getMessage();
 			return true;
 		}
-		return false;
+		return true;
 	}
 
 }

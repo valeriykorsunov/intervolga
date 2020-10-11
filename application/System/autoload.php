@@ -26,4 +26,4 @@ function autoload($className)
 spl_autoload_register('autoload');
 
 //ini_set("display_errors", "off");
-//(new System\ErrorHandler())->register();
+(new System\ErrorHandler())->register();
