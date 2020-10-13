@@ -9,12 +9,15 @@ namespace System;
  */
 class View
 {
+	public $arJsFile = array(),
+			$vData = array(); // viewData - согратил для удобства записи.
+
 	/**
 	 * @param string $path
 	 * @param array $data
 	 * @throws \ErrorException
 	 */
-	public static function render(string $template, string $path, array $arResult = [])
+	public function render(string $template, string $path)
 	{
 		/**
 		 * Получаем путь, где лежат все представления
@@ -33,6 +36,7 @@ class View
 		 * Если данные были переданы, то из элементов массива
 		 * создаются переменные, которые будут доступны в представлении
 		 */
+		/*
 		if (!empty($arResult))
 		{
 			foreach ($arResult as $key => $value)
@@ -40,6 +44,7 @@ class View
 				$$key = $value;
 			}
 		}
+		*/
 
 		$fullTemplatePath = __DIR__ . '/../Views/templates/' . $template . '.php';
 		
@@ -48,4 +53,5 @@ class View
 		// Отображаем представление
 		// include($fullPath);
 	}
+
 }

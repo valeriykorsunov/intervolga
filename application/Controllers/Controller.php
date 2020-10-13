@@ -8,18 +8,19 @@ use System\View;
  */
 class Controller
 {
-	public $dirViwe="";
-	public $templateViwe = "main";
-	public $viewData = array();
+	public $dirViwe="",
+			$templateViwe = "main";
+	protected $view;
 
 	function __construct($nameController)
 	{
+		$this->view = new View;
 		$this->addSettings($nameController);
 	}
 
 	protected function addSettings($nameController)
 	{
-		$this->viewData["title"] = "Решение задач для собеседований";
+		$this->view->vData["title"] = "Решение задач для собеседований";
 		$this->dirViwe = $nameController."/";
 	}
 
@@ -31,6 +32,6 @@ class Controller
 	public function actionIndex()
 	{
 		// Рендер главной страницы 
-		View::render($this->templateViwe, $this->dirViwe.'index', $this->viewData);
+		$this->view->render($this->templateViwe, $this->dirViwe.'index');
 	}
 }

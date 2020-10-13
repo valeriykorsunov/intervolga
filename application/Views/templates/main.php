@@ -7,7 +7,7 @@ use Models\User;
 
 <head>
 	<meta charset="utf-8">
-	<title><?= $arResult["title"] ?></title>
+	<title><?= $this->vData["title"] ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="/css/main.css" />
@@ -24,7 +24,7 @@ use Models\User;
 				<div class="collapse navbar-collapse " id="collapsibleNavbar">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link <?= $arResult["snake_array"] ?>" href="/snake_array/">Массив змейкой</a>
+							<a class="nav-link <?= $this->vData["snake_array"] ?>" href="/snake_array/">Массив змейкой</a>
 						</li>
 						<? if (User::$auth) : ?>
 							<li class="nav-item">
@@ -42,11 +42,11 @@ use Models\User;
 
 
 	<main class="content">
-		<? if ($arResult["menuSection"]) : ?>
+		<? if ($this->vData["menuSection"]) : ?>
 			<div class="container">
 				<div class="row">
-					<? foreach ($arResult["menuSection"] as $menuSection) : ?>
-						<div class="col-2"><a href="<?= $menuSection["URL"] ?>" class="btn btn-light"><?= $menuSection["NAME"] ?></a></div>
+					<? foreach ($this->vData["menuSection"] as $menuSection) : ?>
+						<div class="col-2"><a href="<?= $menuSection["URL"] ?>" class="btn btn-secondary"><?= $menuSection["NAME"] ?></a></div>
 					<? endforeach ?>
 				</div>
 			</div>
@@ -71,6 +71,10 @@ use Models\User;
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+	<? foreach($this->arJsFile as $jsFile): ?>
+		<script src="<?= $jsFile ?>"></script>
+	<?endforeach?>
 </body>
 
 </html>

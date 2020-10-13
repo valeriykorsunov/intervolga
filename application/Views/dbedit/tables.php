@@ -4,19 +4,27 @@
 			<tr>
 				<th>#</th>
 				<th>Название таблиы</th>
+				<th style="width: 50px;"></th>
+				<th style="width: 40px;"></th>
 			</tr>
 		</thead>
 		<tbody>
+			<?
+			$i=0;
+			foreach($arResult["allTable"] as $row):?>
 			<tr>
 				<th scope="row">
-					1
+					<? echo ++$i; ?>
 				</th>
 				<td>
-					12321
+					<?=$row[0]?>
 				</td>
+				<td><a style="color:blue;" href="/dbedit/editTable/?table=<?=$row[0]?>">Редактировать</a></td>
+				<td><a style="color: red;" href="?tableDrop=<?=$row[0]?>">Удалить</a></td>
 			</tr>
+			<?endforeach?>
 		</tbody>
 	</table>
 </div>
 
-<?// var_dump($arRsult) ?>
+<? // var_dump($arResult) ?>

@@ -81,4 +81,9 @@ class DB
 			)'
 		);
 	}
+
+	function tableDrop($nameTable)
+	{
+		$this->link->query('DROP TABLE '.$nameTable.';');
+	}
 }

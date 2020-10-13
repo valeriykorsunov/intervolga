@@ -11,8 +11,15 @@ class dbeditController extends Controller
 
 	function __construct($nameController)
 	{
+		$this->view = new View;
 		$this->addSettings($nameController);
-		$this->viewData["menuSection"] = array(
+
+		$this->vData["menuSection"] = array(
+			array(
+				"SORT"=>100,
+				"NAME"=>"Добавить таблицу",
+				"URL"=>"/dbedit/addTable/"
+			),
 			array(
 				"SORT"=>100,
 				"NAME"=>"Список таблиц БД",
@@ -22,13 +29,13 @@ class dbeditController extends Controller
 				"SORT"=>100,
 				"NAME"=>"SQL запрос текстом",
 				"URL"=>"/dbedit/textSql/"
-			)
+			),
 		);
 	}
 
 	public function actionIndex()
 	{
-		View::render($this->templateViwe, $this->dirViwe . 'index', $this->viewData);
+		$this->view->render($this->templateViwe, $this->dirViwe . 'index');
 	}
 
 	function actionTextSql()
@@ -38,16 +45,36 @@ class dbeditController extends Controller
 			$db = new DB;
 			$resSqlQuery = $db->textSqlQuery($_POST["sqlQuery"]);
 		}
-		$this->viewData["resSqlQuery"] = $resSqlQuery;
+		$this->vData["resSqlQuery"] = $resSqlQuery;
 
-		View::render($this->templateViwe, $this->dirViwe . 'textSql', $this->viewData);
+		$this->view->render($this->templateViwe, $this->dirViwe . 'textSql');
 	}
 
 	function actionTables()
 	{
 		$db = new DB;
-		$this->viewData["allTable"] = $db->getAllTable();
+		
+		if($_GET['tableDrop'])
+		{
+			$db->tableDrop($_GET['tableDrop']);
+		}
 
-		View::render($this->templateViwe, $this->dirViwe . 'tables', $this->viewData);
+
+		$this->vData["allTable"] = $db->getAllTable();
+
+		$this->view->render($this->templateViwe, $this->dirViwe . 'tables');
+	}
+	
+	function actionEditTable()
+	{
+		// обязательно должен быть get парамтр с имнем таблицы
+		// все операции делать пост запросами. 
+		$this->view->render($this->templateViwe, $this->dirViwe . 'editTable');
+	}
+
+	function actionAddTable()
+	{
+		
+		$this->view->render($this->templateViwe, $this->dirViwe . 'addTable');
 	}
 }
