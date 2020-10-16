@@ -65,7 +65,6 @@ class DB
 		{
 			$arows = $result->fetch_all();
 
-
 			/* Освобождаем используемую память */
 			mysqli_free_result($result);
 		}

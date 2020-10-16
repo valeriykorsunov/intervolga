@@ -11,7 +11,7 @@
 		<tbody>
 			<?
 			$i=0;
-			foreach($arResult["allTable"] as $row):?>
+			foreach($this->vData["allTable"] as $row):?>
 			<tr>
 				<th scope="row">
 					<? echo ++$i; ?>
@@ -27,4 +27,4 @@
 	</table>
 </div>
 
-<? // var_dump($arResult) ?>
+<?//  var_dump($this->vData) ?>

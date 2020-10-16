@@ -14,7 +14,7 @@ class dbeditController extends Controller
 		$this->view = new View;
 		$this->addSettings($nameController);
 
-		$this->vData["menuSection"] = array(
+		$this->view->vData["menuSection"] = array(
 			array(
 				"SORT"=>100,
 				"NAME"=>"Добавить таблицу",
@@ -60,7 +60,7 @@ class dbeditController extends Controller
 		}
 
 
-		$this->vData["allTable"] = $db->getAllTable();
+		$this->view->vData["allTable"] = $db->getAllTable();
 
 		$this->view->render($this->templateViwe, $this->dirViwe . 'tables');
 	}
@@ -74,6 +74,8 @@ class dbeditController extends Controller
 
 	function actionAddTable()
 	{
+		$this->view->arJsFile[] = "/js/dbedit.js";
+
 		
 		$this->view->render($this->templateViwe, $this->dirViwe . 'addTable');
 	}

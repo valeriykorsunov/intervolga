@@ -13,9 +13,8 @@ class ErrorHandler
 
 	public function exceptionErrorHandler( $e) //Exception
 	{
-		\var_dump($e);
+		//\var_dump($e);
 		if($e->getCode() == 404){
-			//(new ..\Controllers\errorController("error"))->action404();
 			App::run("error","404", false);
 			echo $e->getMessage();
 			return true;

@@ -49,7 +49,7 @@ class mainController extends Controller
 			$data["login_status"] = "";
 		}
 		
-		View::render($this->templateViwe, $this->dirViwe.'login',$data);
+		$this->view->render($this->templateViwe, $this->dirViwe.'login',$data);
 	}
 
 }
