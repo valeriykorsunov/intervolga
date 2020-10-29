@@ -22,10 +22,15 @@ class ErrorHandler
 		}
 		else
 		{ // делать редиректна ту страницу (любую, можно на 404) с пост параметрами описание ошибки
-			//\var_dump( $e);
-			echo "<br> Сообщение: ".$e->getMessage();
-			echo "<br> Файл: ".$e->getFile();
-			echo "<br> Строка: ".$e->getLine();
+			$_POST["ERROR"] = array(
+				"FILE" => $e->getFile(), 
+				"LINE" => $e->getLine(), 
+				"MESSAGE" => $e->getMessage()
+			);
+			App::run("error", "error", false);
+			// echo "<br> Файл: ".$e->getFile();
+			// echo "<br> Строка: ".$e->getLine();
+			// echo "<br> Сообщение: ".$e->getMessage();
 		}
 		return \true;
 	}

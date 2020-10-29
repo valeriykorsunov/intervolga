@@ -19,4 +19,9 @@ class errorController extends Controller
 		// Рендер главной страницы портала
 		$this->view->render($this->templateViwe, $this->dirViwe.'404');
 	}
+	public function actionError()
+	{
+		// Рендер главной страницы портала
+		$this->view->render($this->templateViwe, $this->dirViwe.'error');
+	}
 }

@@ -35,6 +35,9 @@ body, textarea {
     margin: 0 auto 45px;
     letter-spacing: 1px;
 }
+.margin_t_e{
+	margin: 0 auto 25px;
+}
 
 .page404 {
     color: #dfdfdf;

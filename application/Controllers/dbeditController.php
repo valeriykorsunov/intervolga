@@ -101,8 +101,6 @@ class dbeditController extends Controller
 			{
 				$this->view->vData["error"] = $result[0]['error'];
 			}
-			//var_dump($result);
-
 		}
 		
 		$this->view->render($this->templateViwe, $this->dirViwe . 'addTable');

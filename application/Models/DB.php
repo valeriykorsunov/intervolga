@@ -18,8 +18,7 @@ class DB
 		$DBLogin = "7v2m4jsuser",
 		$DBPassword = 'MWAs=(gap]s6B4H',
 		$DBName = "7v2m4jsdb",
-		$DBCharset = 'utf8',
-		$DBDebug = false;
+		$DBCharset = 'utf8';
 
 	private $link;
 
@@ -27,27 +26,12 @@ class DB
 	function __construct()
 	{
 		$dsn = "mysql:host=$this->DBHost; dbname=$this->DBName; charset=$this->DBCharset;";
-		$this->link = new PDO($dsn, $this->DBLogin, $this->DBPassword);
-
-		// $this->link = mysqli_connect(
-		// 	$this->DBHost,  /* Хост, к которому мы подключаемся */
-		// 	$this->DBLogin,       /* Имя пользователя */
-		// 	$this->DBPassword,   /* Используемый пароль */
-		// 	$this->DBName /* База данных для запросов по умолчанию */
-		// );
-		// if (!$this->link)
-		// {
-		// 	printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error());
-		// 	exit;
-		// }
-
-		// $this->link->set_charset("utf8");
-	}
-
-	function __destruct()
-	{
-		/* Закрываем соединение */
-		//mysqli_close($this->link);
+		$this->link = new PDO(
+			$dsn, 
+			$this->DBLogin, 
+			$this->DBPassword,
+			array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+		);
 	}
 
 	function textSqlQuery(string $text)
@@ -91,7 +75,8 @@ class DB
 
 		if (!$this->link->query($query))
 		{
-			return $this->link->error_list;
+
+			return \false;
 		}
 		return \true;
 	}
