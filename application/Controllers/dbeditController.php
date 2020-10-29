@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\DB;
+
 use System\View;
 
 class dbeditController extends Controller
@@ -35,6 +36,7 @@ class dbeditController extends Controller
 
 	public function actionIndex()
 	{
+		
 		$this->view->render($this->templateViwe, $this->dirViwe . 'index');
 	}
 
@@ -58,8 +60,7 @@ class dbeditController extends Controller
 		{
 			$db->tableDrop($_GET['tableDrop']);
 		}
-
-
+		
 		$this->view->vData["allTable"] = $db->getAllTable();
 
 		$this->view->render($this->templateViwe, $this->dirViwe . 'tables');
@@ -68,6 +69,11 @@ class dbeditController extends Controller
 	function actionEditTable()
 	{
 		// обязательно должен быть get парамтр с имнем таблицы
+		if($_GET["table"])
+		{
+			$db = new DB;
+			$db->getTableDada();
+		}
 		// все операции делать пост запросами. 
 		$this->view->render($this->templateViwe, $this->dirViwe . 'editTable');
 	}
@@ -76,6 +82,28 @@ class dbeditController extends Controller
 	{
 		$this->view->arJsFile[] = "/js/dbedit.js";
 
+		if($_POST["btn"] == "Создать")
+		{
+
+			$tableName = $_POST["tableName"];
+			$arColName = $_POST["name"];
+			$arColTypeDate = $_POST["typeDate"]; 
+			$arColAttribute = $_POST["attribute"];
+			
+			// создать таблицу
+			$db = new DB;
+			$result = $db->createTable($tableName, $arColName, $arColTypeDate, $arColAttribute);
+
+			if($result === true){
+				$this->view->vData["message"] = 'Таблица создана. <a href="/dbedit/tables/">Смотреть список таблиц.</a>';
+			}
+			else
+			{
+				$this->view->vData["error"] = $result[0]['error'];
+			}
+			//var_dump($result);
+
+		}
 		
 		$this->view->render($this->templateViwe, $this->dirViwe . 'addTable');
 	}

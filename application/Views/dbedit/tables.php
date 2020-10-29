@@ -17,14 +17,14 @@
 					<? echo ++$i; ?>
 				</th>
 				<td>
-					<?=$row[0]?>
+					<?=$row?>
 				</td>
-				<td><a style="color:blue;" href="/dbedit/editTable/?table=<?=$row[0]?>">Редактировать</a></td>
-				<td><a style="color: red;" href="?tableDrop=<?=$row[0]?>">Удалить</a></td>
+				<td><a style="color:blue;" href="/dbedit/editTable/?table=<?=$row?>">Редактировать</a></td>
+				<td><a style="color: red;" href="?tableDrop=<?=$row?>">Удалить</a></td>
 			</tr>
 			<?endforeach?>
 		</tbody>
 	</table>
 </div>
 
-<?//  var_dump($this->vData) ?>
+<?  //var_dump($this->vData) ?>
