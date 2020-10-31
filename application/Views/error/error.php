@@ -27,7 +27,7 @@
 							<a href="/" target="_self" class="btn btn-secondary">Вернуться на главную</a>
 							</div>
 							<div class="col-6">
-							<a href="<?=$_SERVER["SCRIPT_URL"]?>" target="_self" class="btn btn-primary">Вернуться на эту страницу но без запроса.</a>
+							<a href="<?=$_SERVER["SCRIPT_URL"]?><?if($_SERVER["QUERY_STRING"]) echo "?".$_SERVER["QUERY_STRING"]; ?>" target="_self" class="btn btn-primary">Вернуться на эту страницу но без запроса.</a>
 							</div>
 						</div>
                     </div>
@@ -39,7 +39,3 @@
         </div>
     </div>
     <!-- End Section --> 
-
-	<?
-	//var_dump($_SERVER)
-	?>

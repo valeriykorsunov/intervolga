@@ -28,3 +28,23 @@ function deleteColunt(elem) {
 	event.preventDefault();
 	elem.closest('.row').remove();
 }
+
+async function deleteRow(elem)
+{
+	//event.preventDefault();
+	
+	let data  = new FormData();
+	data.append("ajax", "Y");
+	data.append("delete", "Y");
+	data.append("idRow", elem.getAttribute("idRow"));
+
+	let response = await fetch('', {
+		method: 'POST',
+		body: data
+	});
+
+	let result = await response.text();
+	
+	elem.parentElement.parentElement.remove();
+
+}

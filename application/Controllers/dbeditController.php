@@ -68,12 +68,32 @@ class dbeditController extends Controller
 	
 	function actionEditTable()
 	{
-		// обязательно должен быть get парамтр с имнем таблицы
+		$this->view->arJsFile[] = "/js/dbedit.js";
+
+		$db = new DB;
+
+		if($_POST["ajax"] == "Y")
+		{
+			ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE);
+			ob_clean();
+			if($_POST["delete"] == "Y")
+			{
+				$db->deleteEntry($_GET["table"], $_POST["idRow"]);
+			}
+			
+			die();
+		}
+
+		if($_POST["addEntry"])
+		{
+			$db->addEntry($_GET["table"], $_POST["column"]);
+		}
+
 		if($_GET["table"])
 		{
-			$db = new DB;
-			$db->getTableDada();
+			$this->view->vData["Table"] = $db->getTableDada($_GET["table"]);
 		}
+
 		// все операции делать пост запросами. 
 		$this->view->render($this->templateViwe, $this->dirViwe . 'editTable');
 	}

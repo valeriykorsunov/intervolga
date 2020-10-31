@@ -19,9 +19,9 @@ class DB
 		$DBPassword = 'MWAs=(gap]s6B4H',
 		$DBName = "7v2m4jsdb",
 		$DBCharset = 'utf8';
-
 	private $link;
-
+	private 
+		$tableName;
 
 	function __construct()
 	{
@@ -32,6 +32,11 @@ class DB
 			$this->DBPassword,
 			array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
 		);
+	}
+
+	function setTableName()
+	{
+
 	}
 
 	function textSqlQuery(string $text)
@@ -86,16 +91,30 @@ class DB
 		$this->link->query('DROP TABLE ' . $nameTable . ';');
 	}
 
-	function getTableDada()
+	function getTableDada($tableName)
 	{
-		// $stmt = $this->link->stmt_init();
-		// $stmt->prepare("SELECT * FROM ?");
-		// $stmt->bind_param( "s", $_GET["table"]);
-		// $result = $stmt->get_result();
-		// $stmt->execute();
-		// $stmt->close();
+		// получить имена столбцов
+		$query = $this->link->prepare("select * from $tableName");
+		$query->execute();
+		for ($i = 0; $i < $query->columnCount(); $i++) {
+			$col = $query->getColumnMeta($i);
+			$columns[] = $col['name'];
+		}
+		$table_str = $query->fetchAll();
+		return array("columns"=>$columns, "table_str" =>$table_str);
+	}
 
-		// \var_dump($result);
+	function addEntry($tableName, $arrValues)
+	{
+		$placeholder =implode(",",array_fill(0,count($arrValues),"?"));
+		$placeholderValue = array_column($arrValues, \null);
+		$query = $this->link->prepare("INSERT INTO $tableName VALUES( $placeholder )");
+		$query->execute($placeholderValue);
+	}
 
+	function deleteEntry($tableName, $id)
+	{
+		$query = $this->link->prepare("DELETE FROM $tableName WHERE id = ? ");
+		$query->execute(array($id));
 	}
 }
