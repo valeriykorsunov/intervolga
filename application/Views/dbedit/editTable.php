@@ -31,9 +31,9 @@
 			<? endforeach ?>
 			<tr>
 				<form action="?table=<?= $_GET["table"] ?>" method="post">
-				<th scope="row">
+				<!-- <th scope="row">
 					+
-				</th>
+				</th> -->
 				<? foreach ($this->vData["Table"]["columns"] as $colName) : ?>
 					<td>
 						<input type="text" name="column[<?=$colName?>]" class="form-control" value="">

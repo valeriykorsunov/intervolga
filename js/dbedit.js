@@ -1,4 +1,4 @@
-console.log("dbedit.js - подключен без гритических ошибок");
+console.log("dbedit.js - подключен.");
 
 function addColumn(elem) {
 	event.preventDefault();
@@ -30,7 +30,6 @@ function deleteColunt(elem) {
 }
 
 async function deleteRow(elem) {
-	//event.preventDefault();
 	let data = new FormData();
 	data.append("ajax", "Y");
 	data.append("delete", "Y");
@@ -39,27 +38,45 @@ async function deleteRow(elem) {
 		method: 'POST',
 		body: data
 	});
-	//let result = await response.text();
 	elem.parentElement.parentElement.remove();
 }
 
 async function editRow(elem) {
-	//event.preventDefault();
 	let data = new FormData();
 	data.append("ajax", "Y");
-	data.append("delete", "Y");
-	data.append("idRow", elem.getAttribute("idRow"));
-	let response = await fetch('', {
+	data.append("editRow", "Y");
+
+	let arrElemRow = {};
+	let row = elem.parentElement.parentElement;
+	for (var i = 0; i < row.children.length; i++) 
+	{
+		if(row.children[i].hasAttribute("colName"))
+		{
+			arrElemRow[row.children[i].querySelector("input").getAttribute("name")] = row.children[i].querySelector("input").value;
+		}
+	}
+	data.append("arrElemRow", JSON.stringify(arrElemRow));
+	let response = await fetch('', 
+	{
 		method: 'POST',
 		body: data
 	});
 	//let result = await response.text();
-	elem.parentElement.parentElement.remove();
+
+	for (var i = 0; i < row.children.length; i++) {
+		
+		if(row.children[i].hasAttribute("colName"))
+		{
+			let valueElem = row.children[i].innerHTML;
+			row.children[i].innerHTML = arrElemRow[row.children[i].getAttribute("colName")];
+		}
+	}
+	elem.hidden=true;
+	row.querySelector('[name="enableEditRow"]').hidden=false;
 }
 
 async function enableEditRow(elem) {
 	let row = elem.parentElement.parentElement;
-	//console.log(row);
 	for (var i = 0; i < row.children.length; i++) {
 		
 		if(row.children[i].hasAttribute("colName"))

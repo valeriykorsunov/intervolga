@@ -80,6 +80,15 @@ class dbeditController extends Controller
 			{
 				$db->deleteEntry($_GET["table"], $_POST["idRow"]);
 			}
+
+			if($_POST["editRow"] == "Y")
+			{
+				$param = json_decode($_POST["arrElemRow"], true);
+				$db->editEntry($_GET["table"], $param);
+				//\print_r($_POST);
+				//\print_r(json_decode($_POST["arrElemRow"], true));
+				//$db->deleteEntry($_GET["table"], $_POST["idRow"]);
+			}
 			
 			die();
 		}

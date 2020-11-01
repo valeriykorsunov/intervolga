@@ -118,8 +118,17 @@ class DB
 		$query->execute(array($id));
 	}
 
-	function editEntry()
+	function editEntry($tableName, $arrElemRow)
 	{
-		
+		$id = $arrElemRow["id"];
+		unset($arrElemRow["id"]);
+		$newValue = array();
+		foreach($arrElemRow as $key => $value)
+		{
+			$newValue[] = "$key = :$key";
+		}
+		$newValue = implode(",", $newValue);
+		$query = $this->link->prepare("UPDATE $tableName SET $newValue WHERE id=$id");
+		$query->execute($arrElemRow);
 	}
 }
