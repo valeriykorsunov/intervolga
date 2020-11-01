@@ -15,18 +15,17 @@
 			foreach ($this->vData["Table"]["table_str"] as $row) : ?>
 				<tr>
 					<? foreach ($this->vData["Table"]["columns"] as $colName) : ?>
-						<td>
+						<td colName="<?=$colName?>">
 							<?= $row[$colName] ?>
 						</td>
 					<? endforeach ?>
 					<td>
-						<!-- <a style="color:blue;" href="/dbedit/editTable/?table=<?= $row ?>">Изменить</a> <br>  -->
-						<input name="editRow" type="submit" class="btn btn-primary" value="Изменить">
+						<input onclick="enableEditRow(this)" name="enableEditRow" type="submit" class="btn btn-primary" value="Вкл.ред.">
+						<input onclick="editRow(this)" name="editRow" type="submit" class="btn btn-primary" value="Изменить" hidden>
 
 						<input name="delleteRow" type="submit" class="btn btn-danger" value="Удалить"
 							onclick="deleteRow(this);"	
 							idRow="<?=$row[0]["id"]?>">
-						<!-- <a style="color: red;" href="?tableDrop=<?= $row ?>">Удалить</a> -->
 					</td>
 				</tr>
 			<? endforeach ?>

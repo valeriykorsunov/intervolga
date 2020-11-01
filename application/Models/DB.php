@@ -117,4 +117,9 @@ class DB
 		$query = $this->link->prepare("DELETE FROM $tableName WHERE id = ? ");
 		$query->execute(array($id));
 	}
+
+	function editEntry()
+	{
+		
+	}
 }

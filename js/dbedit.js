@@ -29,22 +29,45 @@ function deleteColunt(elem) {
 	elem.closest('.row').remove();
 }
 
-async function deleteRow(elem)
-{
+async function deleteRow(elem) {
 	//event.preventDefault();
-	
-	let data  = new FormData();
+	let data = new FormData();
 	data.append("ajax", "Y");
 	data.append("delete", "Y");
 	data.append("idRow", elem.getAttribute("idRow"));
-
 	let response = await fetch('', {
 		method: 'POST',
 		body: data
 	});
-
-	let result = await response.text();
-	
+	//let result = await response.text();
 	elem.parentElement.parentElement.remove();
+}
 
+async function editRow(elem) {
+	//event.preventDefault();
+	let data = new FormData();
+	data.append("ajax", "Y");
+	data.append("delete", "Y");
+	data.append("idRow", elem.getAttribute("idRow"));
+	let response = await fetch('', {
+		method: 'POST',
+		body: data
+	});
+	//let result = await response.text();
+	elem.parentElement.parentElement.remove();
+}
+
+async function enableEditRow(elem) {
+	let row = elem.parentElement.parentElement;
+	//console.log(row);
+	for (var i = 0; i < row.children.length; i++) {
+		
+		if(row.children[i].hasAttribute("colName"))
+		{
+			let valueElem = row.children[i].innerHTML;
+			row.children[i].innerHTML = '<input type="text" name="'+row.children[i].getAttribute("colName")+'" class="form-control" placeholder="ИД" value="'+valueElem.trim()+'">';
+		}
+	}
+	elem.hidden=true;
+	row.querySelector('[name="editRow"]').hidden=false;
 }
