@@ -19,8 +19,8 @@ class DB
 		$DBPassword = 'MWAs=(gap]s6B4H',
 		$DBName = "7v2m4jsdb",
 		$DBCharset = 'utf8';
-	private $link;
 	private 
+		$link,
 		$tableName;
 
 	function __construct()
@@ -118,6 +118,7 @@ class DB
 		$query->execute(array($id));
 	}
 
+
 	function editEntry($tableName, $arrElemRow)
 	{
 		$id = $arrElemRow["id"];
@@ -129,6 +130,6 @@ class DB
 		}
 		$newValue = implode(",", $newValue);
 		$query = $this->link->prepare("UPDATE $tableName SET $newValue WHERE id=$id");
-		$query->execute($arrElemRow);
+		return $query->execute($arrElemRow);
 	}
 }

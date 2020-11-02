@@ -55,15 +55,4 @@
 
 <div class="container">
 	<? echo $this->vData["message"]; ?>
-	<p style="color: red;">
-		<? if ($this->vData["error"]) : ?>
-			Таблица не созданна:<br>
-		<? endif ?>
-		<? echo $this->vData["error"]; ?>
-	</p>
-</div>
-
-<div class="container">
-	<h2>Подсказки:</h2>
-
 </div>

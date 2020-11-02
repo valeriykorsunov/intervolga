@@ -8,19 +8,19 @@
                         <div class="page404">
                             <span>ERROR<span class="face404"></span></span>
                         </div>
-                    </div>
+					</div>
+					
                 </div>
                 
                 <div class="hm_columns col-md-12">
                     <div class="hm_column_con">
-                        <!-- <div class="error_desc404"><b>Ошибка!</b></div> -->
-						<div class="error_desc404">
-						<b>Файл: </b><?echo $_POST["ERROR"]["FILE"];?> <br>
-						<b>Строка: </b><?echo $_POST["ERROR"]["LINE"];?>
-						</div>
-						<div class="error_desc404">
-							<b>Сообщение: </b><?echo $_POST["ERROR"]["MESSAGE"];?>
-						</div>
+						<script>
+							let message ={
+								FILE: "<?echo $_POST["ERROR"]["FILE"];?>",
+								LINE: "<?echo $_POST["ERROR"]["LINE"];?>",
+								MESSAGE: "<?echo $_POST["ERROR"]["MESSAGE"];?>"};
+							console.error("Ошибка на сервере:", message);
+						</script>
 
 						<div class="row">
 							<div class="col-6">

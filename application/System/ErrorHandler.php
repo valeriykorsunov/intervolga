@@ -21,16 +21,20 @@ class ErrorHandler
 			return true;
 		}
 		else
-		{ // делать редиректна ту страницу (любую, можно на 404) с пост параметрами описание ошибки
+		{
 			$_POST["ERROR"] = array(
-				"FILE" => $e->getFile(), 
-				"LINE" => $e->getLine(), 
+				"FILE" => $e->getFile(),
+				"LINE" => $e->getLine(),
 				"MESSAGE" => $e->getMessage()
 			);
-			App::run("error", "error", false);
-			// echo "<br> Файл: ".$e->getFile();
-			// echo "<br> Строка: ".$e->getLine();
-			// echo "<br> Сообщение: ".$e->getMessage();
+			if ($_POST["ajax"] == "Y")
+			{
+				\print_r($_POST["ERROR"]);
+			}
+			else
+			{
+				App::run("error", "error", false);
+			}
 		}
 		return \true;
 	}

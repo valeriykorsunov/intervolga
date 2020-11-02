@@ -1,4 +1,4 @@
-console.log("dbedit.js - подключен.");
+console.info("dbedit.js - подключен.");
 
 function addColumn(elem) {
 	event.preventDefault();
@@ -56,12 +56,23 @@ async function editRow(elem) {
 		}
 	}
 	data.append("arrElemRow", JSON.stringify(arrElemRow));
+
 	let response = await fetch('', 
 	{
 		method: 'POST',
 		body: data
 	});
-	//let result = await response.text();
+	let result = await response.text();
+	if(result == "Y")
+	{
+		console.info("Запись изменена.");
+	}
+	else
+	{
+		alert("Ошибка записи!");
+		console.error("Ошибка на сервере: ",result);
+	}
+	
 
 	for (var i = 0; i < row.children.length; i++) {
 		
@@ -73,6 +84,7 @@ async function editRow(elem) {
 	}
 	elem.hidden=true;
 	row.querySelector('[name="enableEditRow"]').hidden=false;
+	row.querySelector('[name="delleteRow"]').hidden=false;
 }
 
 async function enableEditRow(elem) {
@@ -86,5 +98,6 @@ async function enableEditRow(elem) {
 		}
 	}
 	elem.hidden=true;
+	row.querySelector('[name="delleteRow"]').hidden=true;
 	row.querySelector('[name="editRow"]').hidden=false;
 }
