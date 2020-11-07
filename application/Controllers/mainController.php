@@ -2,12 +2,6 @@
 
 namespace Controllers;
 
-use System\View;
-
-/**
- * Главный контроллер приложения
- *
- */
 class mainController extends Controller
 {
 	function actionLogout()
@@ -49,7 +43,7 @@ class mainController extends Controller
 			$data["login_status"] = "";
 		}
 		
-		$this->view->render($this->templateViwe, $this->dirViwe.'login',$data);
+		$this->view->render($this->dirViwe.'login',$data);
 	}
 
 }

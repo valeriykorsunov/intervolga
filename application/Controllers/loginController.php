@@ -38,7 +38,7 @@ class loginController extends Controller
 			$data["login_status"] = "";
 		}
 		
-		$this->view->render($this->templateViwe, $this->dirViwe.'index',$data);
+		$this->view->render($this->dirViwe.'index',$data);
 	}
 	
 }

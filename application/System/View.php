@@ -10,15 +10,13 @@ namespace System;
 class View
 {
 	public $arJsFile = array(),
-			$vData = array(); // viewData - согратил для удобства записи.
+			$vData = array(); // viewData - сократил для удобства записи.
+	protected 
+			$templateViwe = "main";
 
-	/**
-	 * @param string $path
-	 * @param array $data
-	 * @throws \ErrorException
-	 */
-	public function render(string $template, string $path)
+	public function render(string $path)
 	{
+		$template = $this->templateViwe;
 		/**
 		 * Получаем путь, где лежат все представления
 		 */
@@ -52,6 +50,11 @@ class View
 		include($fullTemplatePath);
 		// Отображаем представление
 		// include($fullPath);
+	}
+
+	function setTemplateViwe(string $str)
+	{
+		$this->templateViwe = $str;
 	}
 
 }

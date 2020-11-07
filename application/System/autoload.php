@@ -20,10 +20,8 @@ function autoload($className)
 	//$fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 	$fileName .= $className . '.php';
 	$fileName = 'application/' . $fileName;
-	//require $fileName;
 	include_once $fileName;
 }
 spl_autoload_register('autoload');
 
-//ini_set("display_errors", "off");
 (new System\ErrorHandler())->register();
