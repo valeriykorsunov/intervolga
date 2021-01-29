@@ -11,6 +11,7 @@ use Models\User;
  */
 class App
 {
+	
 	/**
 	 * Запуск приложения
 	 * 
@@ -18,7 +19,11 @@ class App
 	 */
 	public static function run($controller = "main", $action = "index", $path = true)
 	{
-		new User;
+		$user = new User;
+		
+		$user->userParamAutoriz();
+
+
 		if ($path)
 		{
 			// Получаем URL запроса
@@ -28,48 +33,49 @@ class App
 			$pathParts = explode('/', $path);
 		}
 
-		// Получаем имя контроллера
 		if ($pathParts[1])
 		{
 			$controller = $pathParts[1];
 		}
-
-		// Получаем имя действия
 		if ($pathParts[2])
 		{
 			$action = $pathParts[2];
 		}
 
+		/*
+		new User;
 		if(User::$auth == false)
 		{
 			$controller = 'main';
 			$action = 'login';
 		}
+		*/
 
 		$nameController = $controller;
-		// Формируем пространство имен для контроллера
 		$controller = 'Controllers\\' . $controller . 'Controller';
-
-		// Если класса не существует, выбрасывем исключение
 		if (!class_exists($controller))
 		{
-			//App::run("error","404", false);
 			throw new \ErrorException('Controller "'.$controller.'" не существует', 404);
 		}
 
-		// Создаем экземпляр класса контроллера
+		
 		$objController = new $controller($nameController);
-
-		// Формируем наименование действия
-		$action = 'action' . ucfirst($action);
-		// Если действия у контроллера не существует, выбрасываем исключение
-		if (!method_exists($objController, $action))
+		if(!$user->checkAccess($objController->getGroupsWithAccess()))
 		{
-			//App::run("error","404", false);
-			throw new \ErrorException('action "' . $action . '" не существует', 404);
+			return App::accessDenied();
 		}
 
-		// Вызываем действие контроллера
+		$action = 'action'.ucfirst($action);
+		if (!method_exists($objController, $action))
+		{
+			throw new \ErrorException('action "' . $action . '" не существует', 404);
+		}
 		$objController->$action();
+	}
+
+	static function accessDenied()
+	{
+		App::run("user", "login", false);
+		return \false;
 	}
 }

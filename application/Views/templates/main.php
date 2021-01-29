@@ -1,6 +1,6 @@
 <?
-
 use Models\User;
+$user = new User; 
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -23,15 +23,21 @@ use Models\User;
 				</button>
 				<div class="collapse navbar-collapse " id="collapsibleNavbar">
 					<ul class="navbar-nav">
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a class="nav-link <?= $this->vData["snake_array"] ?>" href="/snake_array/">Массив змейкой</a>
-						</li>
-						<? if (User::$auth) : ?>
+						</li> -->
+						<?if(false):?>
+						<?endif;?>
+						<? if (USER["AUTHORIZED"]===true) : ?>
 							<li class="nav-item">
 								<a class="nav-link" href="/dbedit/">Работа с БД</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="/main/logout">Выход</a>
+								<a class="nav-link" href="/user/logout/">Выход</a>
+							</li>
+						<?else:?>
+							<li class="nav-item">
+								<a class="nav-link" href="/user/login/">Вход</a>
 							</li>
 						<? endif ?>
 					</ul>

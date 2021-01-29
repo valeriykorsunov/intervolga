@@ -7,6 +7,8 @@ use Models\DB;
 
 class dbeditController extends Controller
 {
+	public $groupsWithAccess = array(1);
+
 	function __construct($nameController)
 	{
 		parent::__construct($nameController);

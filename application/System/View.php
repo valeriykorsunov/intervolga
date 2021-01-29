@@ -27,7 +27,7 @@ class View
 		 */
 		if (!file_exists($fullPathView))
 		{
-			throw new \ErrorException('view cannot be found');
+			throw new \ErrorException($fullPathView.' - view cannot be found');
 		}
 
 		/**
