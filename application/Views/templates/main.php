@@ -26,7 +26,10 @@ $user = new User;
 						<!-- <li class="nav-item">
 							<a class="nav-link <?= $this->vData["snake_array"] ?>" href="/snake_array/">Массив змейкой</a>
 						</li> -->
-						<?if(false):?>
+						<?if(USER["ADMIN"] === true):?>
+							<li class="nav-item">
+								<a class="nav-link" href="/user/">Пользователи</a>
+							</li>
 						<?endif;?>
 						<? if (USER["AUTHORIZED"]===true) : ?>
 							<li class="nav-item">
@@ -45,6 +48,12 @@ $user = new User;
 			</div>
 		</nav>
 	</header>
+
+	<div class="container">
+	<?
+		//var_dump(USER);
+	?>
+	</div>
 
 
 	<main class="content">

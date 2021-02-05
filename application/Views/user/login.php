@@ -5,7 +5,7 @@
 		<h1>Вы не авторизованы</h1>
 		<form class="row" action="" method="post">
 			<div class="form-group col-sm-2">
-				<input type="text" name="login" class="form-control" placeholder="Логин" value="">
+				<input type="text" name="login" class="form-control" placeholder="Логин" value="<?=$_POST["login"]?>">
 			</div>
 			<div class="form-group col-sm-2">
 				<input type="password" name="password" class="form-control" placeholder="Пароль" value="">

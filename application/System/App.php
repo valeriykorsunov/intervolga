@@ -2,7 +2,7 @@
 
 namespace System;
 
-use Models\User;
+use Models\Session;
 
 /**
  * Главный класс приложения
@@ -19,9 +19,8 @@ class App
 	 */
 	public static function run($controller = "main", $action = "index", $path = true)
 	{
-		$user = new User;
-		
-		$user->userParamAutoriz();
+		$session = new Session;
+		$session->userParamAutoriz();
 
 
 		if ($path)
@@ -42,15 +41,6 @@ class App
 			$action = $pathParts[2];
 		}
 
-		/*
-		new User;
-		if(User::$auth == false)
-		{
-			$controller = 'main';
-			$action = 'login';
-		}
-		*/
-
 		$nameController = $controller;
 		$controller = 'Controllers\\' . $controller . 'Controller';
 		if (!class_exists($controller))
@@ -60,7 +50,7 @@ class App
 
 		
 		$objController = new $controller($nameController);
-		if(!$user->checkAccess($objController->getGroupsWithAccess()))
+		if(!$session->checkAccess($objController->getGroupsWithAccess()))
 		{
 			return App::accessDenied();
 		}
