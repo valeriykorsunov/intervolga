@@ -11,7 +11,7 @@ use PDO;
  * не использую PDO т.к. работает на сервере с bitrix vm.
  */
 
-class DB
+class DB_0
 {
 	private
 		$DBHost = "127.0.0.1",

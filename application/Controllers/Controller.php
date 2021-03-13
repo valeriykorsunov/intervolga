@@ -2,7 +2,9 @@
 namespace Controllers;
 
 use System\View;
-use Models\User;
+use System\App;
+
+use Models\Session;
 
 abstract class Controller
 {
@@ -23,6 +25,11 @@ abstract class Controller
 		$this->usersGroup[] = $usersGroup;
 	}
 
+	protected function setUsersGroup(array $usersGroup)
+	{
+		$this->groupsWithAccess = $usersGroup;
+	}
+
 	public function actionIndex()
 	{
 		$this->view->render($this->dirViwe.'index');
@@ -31,5 +38,14 @@ abstract class Controller
 	public function getGroupsWithAccess()
 	{
 		return $this->groupsWithAccess;
+	}
+
+	function onlyForGroups(array $groups)
+	{
+		if(!Session::checkAccess($groups))
+		{
+			App::accessDenied();
+			die;
+		}
 	}
 }

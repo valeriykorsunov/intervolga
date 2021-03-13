@@ -22,7 +22,6 @@ class App
 		$session = new Session;
 		$session->userParamAutoriz();
 
-
 		if ($path)
 		{
 			// Получаем URL запроса
