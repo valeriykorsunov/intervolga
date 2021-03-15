@@ -16,20 +16,20 @@
 			foreach ($this->vData["userList"] as $user) : ?>
 				<tr>
 					<th scope="row">
-						<? echo $user["id"]; ?>
+						<? echo $user["USER_ID"]; ?>
 					</th>
 					<td>
-						<?= $user["login"] ?>
+						<?= $user["LOGIN"] ?>
 					</td>
 					<td>
-						<?= $user["name"] ?>
+						<?= $user["NAME"] ?>
 					</td>
 					<td>
-						<?= $user["usgroup"] ?>
+						<?= $user["USER_GROUP"] ?>
 					</td>
-					<td><a style="color:blue;" href="/dbedit/editUser/?idUser=<?= $user["id"] ?>">Редактировать</a></td>
+					<td><a style="color:blue;" href="/user/edituser/?user=<?= $user["USER_ID"] ?>">Редактировать</a></td>
 					<td>
-						<? if ($user["usgroup"] != '777') : ?>
+						<? if ($user["USER_GROUP"] != '777') : ?>
 							<a style="color: red;" href="?deletUser=<?= $user["id"] ?>">Удалить</a>
 						<? endif ?>
 					</td>
@@ -39,6 +39,3 @@
 	</table>
 </div>
 
-<?
-//var_dump($this->vData["userList"]);
-?>

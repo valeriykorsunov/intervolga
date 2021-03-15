@@ -16,8 +16,8 @@ class userController extends Controller
 			$this->view->vData["menuSection"] = array(
 				array(
 					"SORT" => 100,
-					"NAME" => "Изменить данные пользователя",
-					"URL" => "/user/edituser/"
+					"NAME" => "Список пользователей",
+					"URL" => "/user/list/"
 				),
 				array(
 					"SORT" => 100,
